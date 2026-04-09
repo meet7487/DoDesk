@@ -1,0 +1,289 @@
+/* src/Component/AISuggest.css */
+/* Feature 9 – AI-Based Task Suggestions */
+
+/* ── Trigger button ── */
+.ai-suggest-btn {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  border-radius: var(--radius-md) !important;
+  border-color: var(--accent-secondary) !important;
+  color: var(--accent-secondary) !important;
+  padding: 5px var(--sp-4) !important;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-spring) !important;
+}
+.ai-suggest-btn:hover:not(:disabled) {
+  background: rgba(124, 92, 252, 0.08) !important;
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.15) !important;
+  transform: translateY(-1px) !important;
+}
+.ai-suggest-btn.loading {
+  opacity: 0.8;
+  cursor: wait !important;
+}
+.ai-suggest-btn:disabled {
+  opacity: 0.45 !important;
+}
+
+/* ── Error ── */
+.ai-error {
+  margin-top: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-md);
+}
+.ai-error-text {
+  font-size: var(--text-xs) !important;
+  color: #dc2626 !important;
+  line-height: 1.5 !important;
+}
+
+/* ── Result card ── */
+.ai-result-card {
+  margin-top: var(--sp-4);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-4) var(--sp-5);
+  animation: scaleIn var(--duration-fast) var(--ease-spring) both;
+  transition: background 0.35s var(--ease-out), border-color 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top shimmer accent */
+.ai-result-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    var(--accent-primary), var(--accent-secondary), var(--accent-cyan)
+  );
+}
+
+/* ── Header ── */
+.ai-result-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+  flex-wrap: wrap;
+}
+.ai-result-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  flex: 1;
+}
+
+/* Confidence bar */
+.ai-confidence {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-left: auto;
+}
+.ai-confidence-label {
+  font-size: 10px !important;
+  color: var(--text-muted) !important;
+  white-space: nowrap;
+}
+.ai-confidence-bar-wrap {
+  width: 60px;
+}
+.ai-confidence-pct {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: var(--text-secondary) !important;
+  min-width: 28px;
+}
+
+/* ── Chips row ── */
+.ai-chips-row {
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-3);
+}
+.ai-chip-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ai-chip-label {
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--text-muted) !important;
+}
+
+/* Priority chip — colours set inline */
+.ai-priority-chip {
+  font-family: var(--font-body) !important;
+  border-radius: var(--radius-full) !important;
+  height: 24px !important;
+}
+
+/* Deadline chip */
+.ai-deadline-chip {
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  background: var(--accent-glow) !important;
+  color: var(--accent-primary) !important;
+  border: 1px solid var(--border-accent) !important;
+  border-radius: var(--radius-full) !important;
+  height: 24px !important;
+}
+
+/* Hours chip */
+.ai-hours-chip {
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  background: rgba(100, 116, 139, 0.12) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-default) !important;
+  border-radius: var(--radius-full) !important;
+  height: 24px !important;
+}
+
+/* ── Reasoning ── */
+.ai-reasoning {
+  font-size: var(--text-xs) !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.6 !important;
+  margin-bottom: var(--sp-3) !important;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-muted);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--accent-secondary);
+  transition: background 0.35s, color 0.35s;
+}
+
+/* ── Sub-tasks ── */
+.ai-subtasks-section {
+  margin-bottom: var(--sp-3);
+}
+.ai-subtasks-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--sp-1) 0;
+  transition: opacity var(--duration-fast);
+}
+.ai-subtasks-toggle:hover { opacity: 0.75; }
+.ai-subtasks-toggle:disabled { opacity: 0.4; cursor: default; }
+
+.ai-subtasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
+  padding-left: var(--sp-1);
+}
+.ai-subtask-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+}
+.ai-subtask-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  background: rgba(124, 92, 252, 0.1);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-family: var(--font-display);
+}
+.ai-subtask-text {
+  font-size: var(--text-xs) !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.5 !important;
+}
+
+/* ── Apply row ── */
+.ai-apply-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+
+.ai-apply-btn {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: var(--radius-md) !important;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+  padding: var(--sp-2) var(--sp-4) !important;
+}
+.ai-apply-btn:hover { opacity: 0.9 !important; }
+
+.ai-applied-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 12px;
+  font-weight: 600;
+  color: #16a34a;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  border-radius: var(--radius-full);
+  padding: var(--sp-1) var(--sp-3);
+  animation: scaleIn var(--duration-fast) var(--ease-spring) both;
+}
+
+.ai-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--sp-1) var(--sp-2);
+  border-radius: var(--radius-md);
+  transition:
+    color var(--duration-fast),
+    background var(--duration-fast);
+}
+.ai-retry-btn:hover:not(:disabled) {
+  color: var(--accent-primary);
+  background: var(--accent-glow);
+}
+.ai-retry-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Wrapper spacing ── */
+.ai-suggest-wrapper {
+  margin-top: var(--sp-3);
+}

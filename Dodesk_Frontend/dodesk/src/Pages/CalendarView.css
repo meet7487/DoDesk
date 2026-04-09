@@ -1,0 +1,263 @@
+/* src/Pages/CalendarView.css */
+/* FullCalendar theme overrides + page layout */
+
+.calendar-page {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 68px);
+  padding: var(--sp-8) 0 var(--sp-16);
+  animation: fadeUp var(--duration-slow) var(--ease-out) both;
+}
+
+.calendar-header { margin-bottom: var(--sp-6); }
+.calendar-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-3xl) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  /* color set by gradient below */
+  margin-bottom: var(--sp-2) !important;
+}
+.calendar-subtitle {
+  font-size: var(--text-sm) !important;
+  color: var(--text-muted) !important;
+  margin-bottom: var(--sp-4) !important;
+}
+
+/* Legend */
+.calendar-legend {
+  display: flex;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+.legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Calendar card */
+.calendar-card {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-xl) !important;
+  overflow: hidden;
+  padding: var(--sp-5) !important;
+  transition: background 0.35s !important;
+}
+
+/* ── FullCalendar overrides ── */
+.fc .fc-toolbar-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.fc .fc-button {
+  font-family: var(--font-body) !important;
+  font-size: 12px !important;
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-default) !important;
+  color: var(--text-secondary) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 4px 12px !important;
+  text-transform: none !important;
+}
+.fc .fc-button-active,
+.fc .fc-button:focus {
+  background: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.fc .fc-daygrid-day {
+  background: transparent;
+  transition: background var(--duration-fast);
+}
+.fc .fc-daygrid-day:hover { background: var(--bg-overlay); }
+.fc .fc-daygrid-day-number {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+.fc .fc-day-today { background: var(--accent-glow) !important; }
+.fc .fc-col-header-cell-cushion {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+.fc .fc-event {
+  border-radius: 4px !important;
+  border: none !important;
+  font-size: 11px !important;
+  font-family: var(--font-body) !important;
+  padding: 1px 4px !important;
+  cursor: pointer;
+}
+.fc .fc-scrollgrid { border-color: var(--border-subtle) !important; }
+.fc td, .fc th { border-color: var(--border-subtle) !important; }
+
+/* ── Task detail popup ── */
+.cal-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn var(--duration-fast) var(--ease-out);
+}
+.cal-popup {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-6);
+  width: 380px;
+  max-width: 90vw;
+  position: relative;
+  animation: scaleIn var(--duration-fast) var(--ease-spring) both;
+  box-shadow: var(--shadow-xl);
+}
+.cal-popup-close {
+  position: absolute;
+  top: var(--sp-4); right: var(--sp-4);
+  background: none; border: none;
+  color: var(--text-muted); cursor: pointer;
+  font-size: 1rem;
+  transition: color var(--duration-fast);
+}
+.cal-popup-close:hover { color: var(--text-primary); }
+.cal-popup-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-lg) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  margin-bottom: var(--sp-4) !important;
+  padding-right: var(--sp-6);
+}
+.cal-popup-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+.cal-popup-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  min-width: 72px;
+  flex-shrink: 0;
+}
+.cal-popup-value {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+.cal-popup-desc {
+  margin-top: var(--sp-3);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--sp-3);
+}
+
+/* ── Gradient title with visible emoji ── */
+.dashboard-title,
+.calendar-title,
+.search-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4em !important;
+  /* Reset gradient from parent — gradient only applies to .title-gradient span */
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  color: var(--text-primary) !important;
+}
+
+/* Emoji — fully visible, never clipped */
+.title-emoji {
+  display: inline-flex;
+  align-items: center;
+  font-style: normal;
+  -webkit-text-fill-color: initial !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  font-size: 1em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Only the text gets the gradient */
+.title-gradient {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline;
+}
+
+/* ============================================================
+   GROK-STYLE STARFIELD BACKGROUND
+   ============================================================ */
+.page-starfield-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.page-starfield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.page-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0;
+  animation: pageStarTwinkle linear infinite;
+}
+.page-star.ps-small  { width: 1px;   height: 1px;   animation-duration: calc(3s + var(--brightness,0.5)*2s); }
+.page-star.ps-medium { width: 1.5px; height: 1.5px; animation-duration: calc(2.5s + var(--brightness,0.5)*2s); }
+.page-star.ps-large  { width: 2px;   height: 2px;   animation-duration: calc(2s + var(--brightness,0.5)*3s); }
+.page-star.ps-bright {
+  width: 2.5px; height: 2.5px;
+  background: #e8f4ff;
+  box-shadow: 0 0 3px 1px rgba(79,142,247,0.4);
+  animation-duration: calc(4s + var(--brightness,0.5)*2s);
+}
+@keyframes pageStarTwinkle {
+  0%   { opacity: 0;    transform: scale(0.6); }
+  20%  { opacity: calc(0.3 + var(--brightness,0.5)*0.5); transform: scale(1); }
+  50%  { opacity: calc(0.5 + var(--brightness,0.5)*0.5); transform: scale(1.1); }
+  80%  { opacity: calc(0.2 + var(--brightness,0.5)*0.4); transform: scale(0.95); }
+  100% { opacity: 0;    transform: scale(0.6); }
+}
+.page-shooting-star {
+  position: absolute;
+  width: 160px; height: 1.5px;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 60%, rgba(255,255,255,0) 100%);
+  border-radius: 999px;
+  opacity: 0;
+  transform: rotate(-18deg);
+  transform-origin: left center;
+  animation: pageShootingStar linear infinite;
+}
+@keyframes pageShootingStar {
+  0%   { opacity: 0;   transform: translateX(-200px) rotate(-18deg); }
+  5%   { opacity: 0.9; }
+  70%  { opacity: 0.7; }
+  100% { opacity: 0;   transform: translateX(110vw) rotate(-18deg); }
+}

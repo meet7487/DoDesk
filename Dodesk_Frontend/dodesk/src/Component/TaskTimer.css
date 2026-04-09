@@ -1,0 +1,114 @@
+/* src/Component/TaskTimer.css */
+
+.timer-section {
+  margin-top: var(--sp-6);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--sp-5);
+}
+
+.timer-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+  flex-wrap: wrap;
+}
+.timer-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  flex: 1;
+}
+.timer-total-chip {
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  background: var(--accent-glow) !important;
+  color: var(--accent-primary) !important;
+  border: 1px solid var(--border-accent) !important;
+}
+
+/* Clock display */
+.timer-display {
+  text-align: center;
+  padding: var(--sp-5) var(--sp-4);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--sp-4);
+  transition: border-color var(--duration-fast) var(--ease-out),
+              background 0.35s var(--ease-out);
+}
+.timer-display.active {
+  border-color: var(--border-accent);
+  background: var(--accent-glow);
+  animation: timerPulse 2s ease-in-out infinite;
+}
+@keyframes timerPulse {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50%       { box-shadow: 0 0 0 4px var(--accent-glow-strong); }
+}
+
+.timer-clock {
+  font-family: var(--font-display) !important;
+  font-size: 2.4rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  color: var(--text-primary) !important;
+  font-variant-numeric: tabular-nums;
+}
+.timer-status {
+  font-size: var(--text-xs) !important;
+  color: var(--text-muted) !important;
+  margin-top: var(--sp-1) !important;
+}
+
+/* Controls */
+.timer-controls { margin-bottom: var(--sp-4); }
+
+.timer-start-btn {
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: var(--radius-md) !important;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+  box-shadow: none !important;
+  width: 100%;
+}
+.timer-stop-btn {
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: var(--radius-md) !important;
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  box-shadow: none !important;
+  width: 100%;
+}
+
+/* Log section */
+.timer-log-section { margin-top: var(--sp-2); }
+.timer-log-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+}
+.timer-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+.timer-log-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  transition: background 0.35s;
+}
+.tl-time    { color: var(--text-muted); }
+.tl-duration { font-weight: 700; color: var(--accent-primary); font-family: var(--font-display); }

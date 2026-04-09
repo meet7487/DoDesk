@@ -1,0 +1,99 @@
+/* src/Component/TaskDetailPanel.css */
+
+.tdp-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tdp-content {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  width: 560px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+  animation: scaleIn var(--duration-fast) var(--ease-spring) both;
+  outline: none;
+}
+
+/* Header */
+.tdp-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-6) var(--sp-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.tdp-header-left { flex: 1; min-width: 0; }
+.tdp-task-name {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-lg) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.01em !important;
+  margin-bottom: var(--sp-1) !important;
+}
+.tdp-task-desc {
+  font-size: var(--text-sm) !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.5 !important;
+}
+.tdp-close-btn {
+  color: var(--text-muted) !important;
+  flex-shrink: 0;
+  transition: color var(--duration-fast) !important;
+}
+.tdp-close-btn:hover { color: var(--text-primary) !important; }
+
+/* Meta chips */
+.tdp-meta {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  padding: var(--sp-3) var(--sp-6);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.tdp-meta-chip {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  padding: 3px var(--sp-3);
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--chip-color) 15%, transparent);
+  color: var(--chip-color);
+  border: 1px solid color-mix(in srgb, var(--chip-color) 30%, transparent);
+}
+
+/* Tabs */
+.tdp-tabs {
+  border-bottom: 1px solid var(--border-subtle) !important;
+  padding: 0 var(--sp-4) !important;
+}
+.tdp-tabs .MuiTab-root {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  color: var(--text-muted) !important;
+  min-height: 44px !important;
+}
+.tdp-tabs .MuiTab-root.Mui-selected { color: var(--accent-primary) !important; }
+.tdp-tabs .MuiTabs-indicator { background: var(--accent-primary) !important; }
+.tdp-tab-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+/* Panel */
+.tdp-panel {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--sp-6) var(--sp-6);
+}

@@ -1,0 +1,893 @@
+/* ============================================================
+   DODESK — Task Page Styles
+   Dark/Light Theme | Kanban + Table | Drag & Drop
+   ============================================================ */
+
+/* ============================================================
+   GROK-STYLE STARFIELD BACKGROUND
+   ============================================================ */
+
+/* Full-page fixed background container */
+.task-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Star canvas layer */
+.task-starfield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Individual stars ── */
+.task-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  animation: taskStarTwinkle linear infinite;
+  opacity: 0;
+}
+
+/* Small: faint, numerous */
+.task-star.task-star-small {
+  width: 1px;
+  height: 1px;
+  animation-duration: calc(3s + var(--brightness, 0.5) * 2s);
+}
+
+/* Medium: standard brightness */
+.task-star.task-star-medium {
+  width: 1.5px;
+  height: 1.5px;
+  animation-duration: calc(2.5s + var(--brightness, 0.5) * 2s);
+}
+
+/* Large: brighter, slower */
+.task-star.task-star-large {
+  width: 2px;
+  height: 2px;
+  animation-duration: calc(2s + var(--brightness, 0.5) * 3s);
+}
+
+/* Bright: largest, occasional blue-white tint */
+.task-star.task-star-bright {
+  width: 2.5px;
+  height: 2.5px;
+  background: #e8f4ff;
+  box-shadow: 0 0 3px 1px rgba(79, 142, 247, 0.4);
+  animation-duration: calc(4s + var(--brightness, 0.5) * 2s);
+}
+
+@keyframes taskStarTwinkle {
+  0%   { opacity: 0;    transform: scale(0.6); }
+  20%  { opacity: calc(0.3 + var(--brightness, 0.5) * 0.5); transform: scale(1); }
+  50%  { opacity: calc(0.5 + var(--brightness, 0.5) * 0.5); transform: scale(1.1); }
+  80%  { opacity: calc(0.2 + var(--brightness, 0.5) * 0.4); transform: scale(0.95); }
+  100% { opacity: 0;    transform: scale(0.6); }
+}
+
+/* ── Shooting stars ── */
+.task-shooting-star {
+  position: absolute;
+  width: 160px;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.9) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 999px;
+  animation: taskShootingStar linear infinite;
+  opacity: 0;
+  transform-origin: left center;
+  transform: rotate(-18deg);
+}
+
+@keyframes taskShootingStar {
+  0%   { opacity: 0;   transform: translateX(-200px) rotate(-18deg); }
+  5%   { opacity: 0.9; }
+  70%  { opacity: 0.7; }
+  100% { opacity: 0;   transform: translateX(110vw) rotate(-18deg); }
+}
+
+/* ── Ensure page content sits above the starfield ── */
+/* ============================================================
+   PAGE CONTAINER
+   ============================================================ */
+.task-container {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 68px);
+  padding: var(--sp-8) 0 var(--sp-16);
+  animation: fadeUp var(--duration-slow) var(--ease-out) both;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.task-header,
+.cosmic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-6) !important;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  padding: var(--sp-4) 0 !important;
+}
+
+.header-content { flex: 1; min-width: 200px; }
+
+.cosmic-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-3xl) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--sp-3) !important;
+  margin-bottom: var(--sp-2) !important;
+  color: var(--text-primary) !important;
+  transition: color 0.35s var(--ease-out) !important;
+}
+
+.title-icon {
+  color: var(--accent-primary) !important;
+  filter: drop-shadow(0 0 8px rgba(79,142,247,0.5));
+  font-size: 2rem !important;
+  flex-shrink: 0;
+  animation: float 4s ease-in-out infinite;
+  /* Critical: reset text-fill so icon color shows */
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Gradient title text */
+.title-text {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-glow { display: none; }
+
+.header-subtitle {
+  font-size: var(--text-sm) !important;
+  color: var(--text-muted) !important;
+  margin: 0 !important;
+  transition: color 0.35s var(--ease-out) !important;
+}
+
+/* ── Header Buttons ── */
+.cosmic-create-btn {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  padding: var(--sp-2) var(--sp-5) !important;
+  border-radius: var(--radius-md) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition:
+    transform var(--duration-fast) var(--ease-spring),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out) !important;
+}
+
+.cosmic-create-btn.MuiButton-outlined {
+  background: var(--bg-overlay) !important;
+  border: 1px solid var(--border-default) !important;
+  color: var(--text-secondary) !important;
+}
+.cosmic-create-btn.MuiButton-outlined:hover {
+  background: var(--bg-muted) !important;
+  border-color: var(--border-strong) !important;
+  color: var(--text-primary) !important;
+  transform: translateY(-1px) !important;
+}
+
+.cosmic-create-btn.MuiButton-contained {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 4px 16px var(--accent-glow-strong) !important;
+}
+.cosmic-create-btn.MuiButton-contained:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px var(--accent-glow-strong) !important;
+}
+.cosmic-create-btn:active { transform: scale(0.97) !important; }
+.btn-ripple { display: none; }
+
+/* ============================================================
+   CONTROLS BAR
+   ============================================================ */
+.task-controls,
+.cosmic-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-6) !important;
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: var(--sp-3) var(--sp-5) !important;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  transition: background 0.35s var(--ease-out), border-color 0.35s var(--ease-out) !important;
+}
+
+.tabs-container { flex: 1; min-width: 0; overflow: hidden; }
+
+/* ── Tabs ── */
+.cosmic-tabs .MuiTabs-indicator { display: none !important; }
+
+.cosmic-tabs .MuiTab-root {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  text-transform: none !important;
+  min-height: unset !important;
+  padding: var(--sp-2) var(--sp-4) !important;
+  border-radius: var(--radius-md) !important;
+  margin-right: var(--sp-1) !important;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out) !important;
+}
+.cosmic-tabs .MuiTab-root:hover {
+  color: var(--text-primary) !important;
+  background: var(--bg-overlay) !important;
+  transform: none !important;
+}
+.cosmic-tabs .MuiTab-root.Mui-selected {
+  color: var(--accent-primary) !important;
+  background: var(--accent-glow) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+.tab-content { display: flex; align-items: center; gap: var(--sp-2); }
+.tab-icon { font-size: 1rem !important; }
+.tab-glow { display: none; }
+
+/* ── Search ── */
+.cosmic-search { width: 260px; flex-shrink: 0; }
+
+.cosmic-search .MuiInputBase-root {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-sm) !important;
+  color: var(--text-primary) !important;
+  background: var(--bg-muted) !important;
+  border-radius: var(--radius-md) !important;
+  transition: background 0.35s var(--ease-out) !important;
+}
+.cosmic-search .MuiOutlinedInput-notchedOutline {
+  border-color: var(--border-default) !important;
+}
+.cosmic-search .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--border-strong) !important;
+}
+.cosmic-search .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--accent-primary) !important;
+  border-width: 1.5px !important;
+  box-shadow: 0 0 0 3px var(--accent-glow) !important;
+}
+.search-icon { color: var(--text-muted) !important; }
+
+/* ============================================================
+   KANBAN BOARD
+   ============================================================ */
+.cosmic-board {
+  animation: fadeUp var(--duration-slow) var(--ease-out) both;
+}
+
+.board-columns {
+  user-select: none;
+  -webkit-user-select: none;
+  display: grid;
+  /* Always exactly 6 equal columns — never wrap */
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--sp-4);
+  padding-bottom: var(--sp-4);
+  /* All columns stretch to the same height */
+  align-items: stretch;
+}
+
+/* ── Column ── */
+.cosmic-column {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: var(--sp-4) var(--sp-3) !important;
+  /* All columns share the same height — set by tallest column */
+  min-height: 420px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background 0.35s var(--ease-out) !important;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cosmic-column::before {
+  content: '';
+  position: absolute;
+  top: var(--sp-4);
+  left: 0;
+  bottom: var(--sp-4);
+  width: 3px;
+  background: var(--column-color, var(--accent-primary));
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  opacity: 0.7;
+}
+
+.cosmic-column.drag-over {
+  border-color: var(--border-accent) !important;
+  box-shadow: var(--shadow-accent) !important;
+  background: var(--bg-elevated) !important;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  padding-left: var(--sp-2);
+}
+.column-icon { font-size: 1.4rem; flex-shrink: 0; }
+.column-info { flex: 1; }
+
+.column-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-base) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  margin: 0 !important;
+  transition: color 0.35s var(--ease-out) !important;
+}
+.column-count {
+  font-size: var(--text-xs) !important;
+  color: var(--text-muted) !important;
+  margin: 0 !important;
+}
+.column-glow { display: none; }
+
+.column-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  flex: 1;                /* fill remaining column height */
+  min-height: 60px;
+  will-change: contents;
+}
+
+/* ── Task Card ── */
+.cosmic-task-card {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-md) !important;
+  padding: var(--sp-4) !important;
+  cursor: grab;
+  position: relative;
+  overflow: hidden;
+  /* Only transition non-transform props — DnD owns the transform */
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background 0.35s var(--ease-out) !important;
+  /* GPU layer hint for smooth drag rendering */
+  will-change: transform;
+}
+.cosmic-task-card:hover {
+  border-color: var(--border-accent) !important;
+  box-shadow: var(--shadow-accent) !important;
+  transform: translateY(-2px);
+}
+/* While dragging — disable hover transform, let DnD handle positioning */
+.cosmic-task-card.dragging {
+  border-color: var(--border-accent) !important;
+  box-shadow: 0 12px 40px rgba(79,142,247,0.35) !important;
+  cursor: grabbing !important;
+  z-index: 9999;
+  transition: none !important;
+}
+/* Duplicate .column-content removed — canonical rule is above with flex:1 */
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-3);
+}
+
+.task-priority {
+  font-size: var(--text-xs) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  padding: 2px var(--sp-3) !important;
+  border-radius: var(--radius-full) !important;
+  color: #fff !important;
+}
+
+.drag-handle {
+  color: var(--text-muted) !important;
+  cursor: grab !important;
+  transition: color var(--duration-fast) !important;
+}
+.drag-handle:hover { color: var(--accent-primary) !important; }
+
+.task-name {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  margin-bottom: var(--sp-2) !important;
+  line-height: 1.4 !important;
+  transition: color 0.35s var(--ease-out) !important;
+}
+.task-description {
+  font-size: var(--text-xs) !important;
+  color: var(--text-muted) !important;
+  line-height: 1.55 !important;
+  margin-bottom: var(--sp-3) !important;
+}
+.task-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+.task-assignee,
+.task-deadline {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.assignee-avatar {
+  background: linear-gradient(135deg, var(--accent-primary-dim), var(--accent-secondary)) !important;
+}
+.task-actions { display: flex; justify-content: flex-end; }
+.card-shine  { display: none; }
+.card-border { display: none; }
+
+/* ============================================================
+   TABLE VIEW
+   — Styles kept close to original to avoid webkit-text-fill
+     inheritance issues. Color set directly, not via variables
+     that could be overridden by gradient rules.
+   ============================================================ */
+.cosmic-table {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-xl) !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-md) !important;
+  transition: background 0.35s var(--ease-out), border-color 0.35s var(--ease-out) !important;
+  position: relative;
+  margin-bottom: var(--sp-8) !important;
+}
+
+/* Top accent bar */
+.cosmic-table::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--accent-primary), var(--accent-secondary), var(--accent-cyan)
+  );
+  z-index: 1;
+}
+
+/* Table head */
+.table-header {
+  background: var(--bg-elevated) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+}
+
+.table-header .MuiTableCell-head {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  color: var(--text-muted) !important;
+  padding: var(--sp-4) var(--sp-5) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  background: transparent !important;
+  white-space: nowrap !important;
+  transition: color 0.35s var(--ease-out) !important;
+}
+
+/* Table rows */
+.table-row {
+  transition: background var(--duration-fast) var(--ease-out) !important;
+  animation: fadeIn var(--duration-normal) var(--ease-out) both;
+}
+.table-row:hover { background: var(--bg-overlay) !important; }
+
+.table-row .MuiTableCell-body {
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  /* Use a fixed color — avoids any CSS variable cascade issues */
+  color: #ffffff !important;
+  padding: 1.2rem 1rem !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  vertical-align: middle !important;
+  line-height: 1.4 !important;
+}
+
+/* Light theme override for table cells */
+[data-theme="light"] .table-row .MuiTableCell-body {
+  color: #0f172a !important;
+}
+
+.table-row:last-child .MuiTableCell-body {
+  border-bottom: none !important;
+}
+
+/* ── Task name cell ──
+   IMPORTANT: Do NOT use -webkit-text-fill-color here.
+   The parent .title-text sets it to transparent for the
+   gradient heading. We isolate the table entirely by
+   using hard-coded color values, not CSS vars, and
+   explicitly setting background to none on the span.
+   ── */
+.task-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  min-width: 180px;
+}
+
+.task-name-cell .MuiSvgIcon-root {
+  color: var(--accent-primary) !important;
+  flex-shrink: 0;
+  font-size: 1.1rem !important;
+}
+
+.task-name-cell span {
+  /* Hard reset of any gradient/clip inheritance */
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  /* Explicit color */
+  color: #ffffff !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 340px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+[data-theme="light"] .task-name-cell span {
+  color: #0f172a !important;
+}
+
+/* ── Other table cells ── */
+.deadline-chip {
+  background: var(--accent-glow) !important;
+  color: var(--accent-primary) !important;
+  border: 1px solid var(--border-accent) !important;
+  font-family: var(--font-body) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+
+
+/* ── Description cell in table ───────────────────────────── */
+.task-desc-cell {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-xs) !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.5 !important;
+  max-width: 220px;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.35s var(--ease-out) !important;
+}
+
+[data-theme="light"] .task-desc-cell {
+  color: var(--text-secondary) !important;
+}
+
+.no-deadline {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.status-chip {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-full) !important;
+  padding: 2px var(--sp-3) !important;
+  white-space: nowrap !important;
+  border: 1px solid transparent !important;
+}
+.status-in-progress {
+  background: var(--warning-dim) !important;
+  color: var(--warning) !important;
+  border-color: rgba(245,158,11,0.25) !important;
+}
+.status-started {
+  background: var(--info-dim) !important;
+  color: var(--info) !important;
+  border-color: rgba(56,189,248,0.25) !important;
+}
+.status-completed {
+  background: var(--success-dim) !important;
+  color: var(--success) !important;
+  border-color: rgba(34,197,94,0.25) !important;
+}
+
+.priority-indicator {
+  display: inline-block;
+  padding: 2px var(--sp-3) !important;
+  border-radius: var(--radius-full) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  white-space: nowrap !important;
+  min-width: 64px;
+  text-align: center;
+}
+
+/* Empty state */
+.empty-state { padding: var(--sp-20) var(--sp-8) !important; text-align: center; }
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  animation: float 4s ease-in-out infinite;
+}
+.empty-icon {
+  font-size: 3rem !important;
+  color: var(--text-muted) !important;
+  opacity: 0.5;
+}
+.empty-content .MuiTypography-root {
+  font-family: var(--font-body) !important;
+  color: var(--text-muted) !important;
+  font-size: var(--text-base) !important;
+}
+
+/* ============================================================
+   ACTION BUTTONS
+   ============================================================ */
+.task-action-btn {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: var(--radius-md) !important;
+  padding: var(--sp-1) var(--sp-3) !important;
+}
+.task-start-btn {
+  border-color: var(--accent-secondary) !important;
+  color: var(--accent-secondary) !important;
+}
+.task-start-btn:hover {
+  background: rgba(124,92,252,0.1) !important;
+  transform: translateY(-1px) !important;
+}
+.task-complete-btn {
+  background: linear-gradient(135deg, var(--success), #16a34a) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 3px 10px rgba(34,197,94,0.3) !important;
+}
+.task-complete-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(34,197,94,0.4) !important;
+}
+.task-completed-chip {
+  background: var(--success-dim) !important;
+  color: var(--success) !important;
+  border: 1px solid rgba(34,197,94,0.25) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.cosmic-modal .MuiBackdrop-root {
+  background: var(--modal-overlay-bg) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 580px;
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-default) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: var(--sp-8) !important;
+  box-shadow: var(--shadow-xl) !important;
+  animation: scaleIn var(--duration-normal) var(--ease-spring);
+  outline: none;
+  transition: background 0.35s var(--ease-out);
+  /* Taller modal so AI result card is fully visible without scrolling */
+  max-height: 92vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-cyan));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-6);
+}
+.modal-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-xl) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--text-primary) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--sp-3) !important;
+}
+.modal-icon { color: var(--accent-primary) !important; font-size: 1.4rem !important; }
+.modal-glow { display: none; }
+
+.modal-form { display: flex; flex-direction: column; gap: var(--sp-2); }
+
+.cosmic-input .MuiInputLabel-root {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+}
+.cosmic-input .MuiInputLabel-root.Mui-focused { color: var(--accent-primary) !important; }
+.cosmic-input .MuiOutlinedInput-root {
+  font-family: var(--font-body) !important;
+  background: var(--bg-muted) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-primary) !important;
+  transition: background 0.35s var(--ease-out) !important;
+}
+.cosmic-input .MuiInputBase-input,
+.cosmic-input .MuiSelect-select { color: var(--text-primary) !important; }
+.cosmic-input .MuiOutlinedInput-notchedOutline { border-color: var(--border-default) !important; }
+.cosmic-input .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline { border-color: var(--border-strong) !important; }
+.cosmic-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--accent-primary) !important;
+  border-width: 1.5px !important;
+  box-shadow: 0 0 0 3px var(--accent-glow) !important;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+.cancel-btn {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  color: var(--text-secondary) !important;
+  border-radius: var(--radius-md) !important;
+  padding: var(--sp-2) var(--sp-5) !important;
+}
+.cancel-btn:hover { background: var(--bg-overlay) !important; color: var(--text-primary) !important; }
+
+.create-btn {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: var(--radius-md) !important;
+  padding: var(--sp-2) var(--sp-6) !important;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 4px 14px var(--accent-glow-strong) !important;
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) !important;
+}
+.create-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px var(--accent-glow-strong) !important;
+}
+.create-btn:active { transform: scale(0.97) !important; }
+.create-btn.Mui-disabled { opacity: 0.5 !important; transform: none !important; box-shadow: none !important; }
+
+/* ============================================================
+   PROJECT SELECT MENU
+   ============================================================ */
+.MuiMenu-paper {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-default) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+.MuiMenuItem-root {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-sm) !important;
+  color: var(--text-secondary) !important;
+  transition: background var(--duration-fast), color var(--duration-fast) !important;
+}
+.MuiMenuItem-root:hover { background: var(--bg-overlay) !important; color: var(--text-primary) !important; }
+.MuiMenuItem-root.Mui-selected { background: var(--accent-glow) !important; color: var(--accent-primary) !important; }
+.MuiMenuItem-root.Mui-disabled { color: var(--text-muted) !important; opacity: 0.5 !important; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .board-columns { grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); }
+}
+
+@media (max-width: 768px) {
+  .task-header,
+  .cosmic-header { flex-direction: column; align-items: flex-start !important; }
+  .cosmic-title  { font-size: var(--text-2xl) !important; }
+  .task-controls,
+  .cosmic-controls { flex-direction: column; align-items: stretch !important; }
+  .cosmic-search { width: 100% !important; }
+  .board-columns { grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); }
+  .modal-content { width: 95%; padding: var(--sp-6) !important; }
+}
+
+@media (max-width: 540px) {
+  .board-columns { grid-template-columns: 1fr; }
+  .cosmic-create-btn { width: 100% !important; }
+  .modal-actions { flex-direction: column; }
+  .cancel-btn, .create-btn { width: 100% !important; }
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .task-container, .cosmic-task-card, .title-icon, .empty-content {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

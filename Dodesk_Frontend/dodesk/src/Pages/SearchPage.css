@@ -1,0 +1,248 @@
+/* src/Pages/SearchPage.css */
+
+.search-page {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 68px);
+  padding: var(--sp-8) 0 var(--sp-16);
+  animation: fadeUp var(--duration-slow) var(--ease-out) both;
+  width: 100%;
+  box-sizing: border-box;
+}
+.search-header { margin-bottom: var(--sp-6); }
+.search-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-3xl) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  color: var(--text-primary) !important;
+  margin-bottom: var(--sp-2) !important;
+}
+.search-subtitle {
+  font-size: var(--text-sm) !important;
+  color: var(--text-muted) !important;
+}
+
+/* Filter card */
+.search-filter-card {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-xl) !important;
+  margin-bottom: var(--sp-6) !important;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+.search-filter-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-cyan));
+}
+
+/* MUI input overrides */
+/* ── TextField & Select theming ── */
+.sf-input .MuiInputLabel-root                           { color: var(--text-muted) !important; font-family: var(--font-body) !important; }
+.sf-input .MuiInputLabel-root.Mui-focused               { color: var(--accent-primary) !important; }
+.sf-input .MuiOutlinedInput-root                        { background: var(--bg-muted) !important; border-radius: var(--radius-md) !important; font-family: var(--font-body) !important; color: var(--text-primary) !important; transition: background 0.35s !important; }
+.sf-input .MuiOutlinedInput-root:hover                  { background: var(--bg-elevated) !important; }
+.sf-input .MuiInputBase-input                           { color: var(--text-primary) !important; font-family: var(--font-body) !important; }
+.sf-input .MuiOutlinedInput-notchedOutline              { border-color: var(--border-default) !important; transition: border-color 0.2s !important; }
+.sf-input .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline { border-color: var(--border-strong) !important; }
+.sf-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline { border-color: var(--accent-primary) !important; border-width: 1.5px !important; }
+
+/* ── Select-specific fixes (dropdown arrow + value text) ── */
+.sf-input .MuiSelect-select                             { color: var(--text-primary) !important; font-family: var(--font-body) !important; padding: 14px 32px 14px 14px !important; min-width: 60px !important; }
+.sf-input .MuiSelect-icon                               { color: var(--text-muted) !important; }
+
+/* ── FormControl label shrink fix ── */
+.sf-input .MuiFormLabel-root                            { color: var(--text-muted) !important; font-family: var(--font-body) !important; }
+
+/* ── Prevent backdrop blur on Select dropdown ── */
+.MuiPopover-root > .MuiBackdrop-root,
+.MuiMenu-root > .MuiBackdrop-root                       { backdrop-filter: none !important; background: transparent !important; }
+
+.sf-search-btn {
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: var(--radius-md) !important;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+  padding: var(--sp-3) var(--sp-8) !important;
+  box-shadow: none !important;
+}
+.sf-clear-btn {
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-secondary) !important;
+  border-color: var(--border-default) !important;
+}
+.sf-count-chip {
+  background: var(--accent-glow) !important;
+  color: var(--accent-primary) !important;
+  border: 1px solid var(--border-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* Empty state */
+.search-empty {
+  padding: var(--sp-16);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+/* Result cards */
+.search-result-card {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+  transition: border-color var(--duration-fast), transform var(--duration-fast) var(--ease-spring),
+              box-shadow var(--duration-fast), background 0.35s !important;
+  height: 100%;
+}
+.search-result-card:hover {
+  border-color: var(--border-accent) !important;
+  box-shadow: var(--shadow-accent) !important;
+  transform: translateY(-3px);
+}
+.sr-project {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-2);
+}
+.sr-name {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-base) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  margin-bottom: var(--sp-1) !important;
+}
+.sr-desc {
+  font-size: var(--text-xs) !important;
+  color: var(--text-secondary) !important;
+  margin-bottom: var(--sp-3) !important;
+}
+.sr-chips {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-2);
+}
+.sr-assignee {
+  font-size: 11px !important;
+  color: var(--text-muted) !important;
+}
+
+/* ── Responsive full-width fixes ── */
+@media (max-width: 768px) {
+  .search-title { font-size: 1.8rem !important; }
+  .search-filter-card .MuiCardContent-root { padding: var(--sp-4) !important; }
+}
+
+@media (max-width: 480px) {
+  .search-title { font-size: 1.5rem !important; }
+  .sf-search-btn,
+  .sf-clear-btn  { width: 100%; justify-content: center; }
+}
+
+/* ── Gradient title with visible emoji ── */
+.dashboard-title,
+.calendar-title,
+.search-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4em !important;
+  /* Reset gradient from parent — gradient only applies to .title-gradient span */
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  color: var(--text-primary) !important;
+}
+
+/* Emoji — fully visible, never clipped */
+.title-emoji {
+  display: inline-flex;
+  align-items: center;
+  font-style: normal;
+  -webkit-text-fill-color: initial !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  font-size: 1em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Only the text gets the gradient */
+.title-gradient {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline;
+}
+
+/* ============================================================
+   GROK-STYLE STARFIELD BACKGROUND
+   ============================================================ */
+.page-starfield-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.page-starfield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.page-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0;
+  animation: pageStarTwinkle linear infinite;
+}
+.page-star.ps-small  { width: 1px;   height: 1px;   animation-duration: calc(3s + var(--brightness,0.5)*2s); }
+.page-star.ps-medium { width: 1.5px; height: 1.5px; animation-duration: calc(2.5s + var(--brightness,0.5)*2s); }
+.page-star.ps-large  { width: 2px;   height: 2px;   animation-duration: calc(2s + var(--brightness,0.5)*3s); }
+.page-star.ps-bright {
+  width: 2.5px; height: 2.5px;
+  background: #e8f4ff;
+  box-shadow: 0 0 3px 1px rgba(79,142,247,0.4);
+  animation-duration: calc(4s + var(--brightness,0.5)*2s);
+}
+@keyframes pageStarTwinkle {
+  0%   { opacity: 0;    transform: scale(0.6); }
+  20%  { opacity: calc(0.3 + var(--brightness,0.5)*0.5); transform: scale(1); }
+  50%  { opacity: calc(0.5 + var(--brightness,0.5)*0.5); transform: scale(1.1); }
+  80%  { opacity: calc(0.2 + var(--brightness,0.5)*0.4); transform: scale(0.95); }
+  100% { opacity: 0;    transform: scale(0.6); }
+}
+.page-shooting-star {
+  position: absolute;
+  width: 160px; height: 1.5px;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 60%, rgba(255,255,255,0) 100%);
+  border-radius: 999px;
+  opacity: 0;
+  transform: rotate(-18deg);
+  transform-origin: left center;
+  animation: pageShootingStar linear infinite;
+}
+@keyframes pageShootingStar {
+  0%   { opacity: 0;   transform: translateX(-200px) rotate(-18deg); }
+  5%   { opacity: 0.9; }
+  70%  { opacity: 0.7; }
+  100% { opacity: 0;   transform: translateX(110vw) rotate(-18deg); }
+}

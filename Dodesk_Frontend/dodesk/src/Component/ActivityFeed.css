@@ -1,0 +1,92 @@
+/* src/Component/ActivityFeed.css */
+
+.activity-feed {
+  padding: var(--sp-4) 0;
+}
+
+.af-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+}
+.af-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+}
+
+.af-loading, .af-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-6);
+}
+
+/* Timeline list */
+.af-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.af-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  position: relative;
+  padding-bottom: var(--sp-4);
+}
+
+/* Vertical line connecting dots */
+.af-line {
+  position: absolute;
+  left: 14px;
+  top: 28px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-subtle);
+  z-index: 0;
+}
+
+/* Dot */
+.af-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 1;
+  position: relative;
+}
+.af-dot-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Content */
+.af-content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 3px;
+}
+.af-desc {
+  font-size: var(--text-sm) !important;
+  color: var(--text-primary) !important;
+  line-height: 1.4 !important;
+  margin-bottom: var(--sp-1) !important;
+}
+.af-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+.af-time {
+  font-size: 10px;
+  color: var(--text-muted);
+}

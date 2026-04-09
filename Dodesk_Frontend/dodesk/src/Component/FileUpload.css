@@ -1,0 +1,94 @@
+/* src/Component/FileUpload.css */
+
+.file-upload-section {
+  margin-top: var(--sp-6);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--sp-5);
+}
+
+.fu-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+.fu-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+}
+
+/* Drop zone */
+.fu-dropzone {
+  border: 2px dashed var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              background var(--duration-fast) var(--ease-out);
+  min-height: 100px;
+  margin-bottom: var(--sp-3);
+}
+.fu-dropzone:hover,
+.fu-dropzone.drag-active {
+  border-color: var(--accent-primary);
+  background: var(--accent-glow);
+}
+.fu-dropzone.uploading {
+  cursor: not-allowed;
+  border-color: var(--accent-primary);
+  background: var(--accent-glow);
+}
+.fu-uploading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: var(--sp-1);
+}
+
+/* File list */
+.fu-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.fu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-fast),
+              background 0.35s var(--ease-out);
+}
+.fu-item:hover {
+  border-color: var(--border-default);
+  background: var(--bg-overlay);
+}
+.fu-item-icon { flex-shrink: 0; }
+.fu-item-info { flex: 1; min-width: 0; }
+.fu-item-name {
+  font-size: var(--text-sm) !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fu-item-meta {
+  font-size: 11px !important;
+  color: var(--text-muted) !important;
+}
+.fu-item-actions {
+  display: flex;
+  gap: var(--sp-1);
+  flex-shrink: 0;
+}
