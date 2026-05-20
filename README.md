@@ -76,12 +76,6 @@ uvicorn main:app --reload
 
 ---
 
-## 📸 Screenshots
-
-(Add your project screenshots here)
-
----
-
 ## 🎯 Purpose
 
 This project was built to practice full-stack development concepts and create a real-world application that solves team collaboration and task management problems.
